@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?><project>
+	<version>1.0</version>
+	<description>Cutting stock problem, Integer Programming</description>
+	<configs>
+		<config default="true" name="Basic Configuration" category="opl">
+			<ref type="data" name="cuttingStock.dat">
+			</ref>
+			<ref type="model" name="cuttingStock.mod">
+			</ref>
+		</config>
+	</configs>
+</project>
