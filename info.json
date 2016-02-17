@@ -5,5 +5,5 @@
 	"development": [ "Java" ],
 	"category": [ {"APPLICATION":["Desktop Application"]} ],
 	"industry": [ "Operations Research" ],
-	"abstract": "A desktop application that shows how to use an IBM DOcloud Java client to iteratively solve a multi-model problem with a column generation algorithm. In this example, the problem consists of cutting large bulk rolls of sheet metal into rolls of different widths to meet customer demands while minimizing the number of bulk rolls that need to be sliced."
+	"abstract": "A desktop application using a Java client to iteratively solve a multi-model problem with a column generation algorithm. Bulk rolls of sheet metal are cut into rolls of different widths, minimizing the number of rolls that need to be sliced."
 }
