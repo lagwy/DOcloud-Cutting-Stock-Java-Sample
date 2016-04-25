@@ -1,9 +1,9 @@
 # IBM Decision Optimization on Cloud Cutting Stock Java Sample
 
-IBM Decision Optimization on Cloud (DOcloud) allows you to solve optimization
+IBM Decision Optimization on Cloud (DOcplexcloud) allows you to solve optimization
 problems on the cloud without installing or configuring a solver. 
 
-This example illustrates the use of the DOcloud API to iteratively solve a 
+This example illustrates the use of the DOcplexcloud API to iteratively solve a 
 multi-model, a series of linked optimization problems. In the example, large 
 bulk rolls of sheet metal of a given width are cut into rolls of different 
 widths to meet customer demands while minimizing the number of bulk rolls that
@@ -40,13 +40,13 @@ java -version
 mvn --version
 ```
 
-3. Once you have registered and logged in to DOcloud, get the IBM DOcloud 
+3. Once you have registered and logged in to DOcplexcloud, get the IBM DOcplexcloud 
 base URL and an API key, which are accessible on the 
 [Get API Key page](https://dropsolve-oaas.docloud.ibmcloud.com/dropsolve/api). 
 Copy the base URL and the API key to the maven properties in your `~/.m2/settings.xml` 
 settings file, where
-  * `yourKey` is the API key (clientID) that you generate after registering for DOcloud.
-  * `yourURL` is the base URL that you get after registering for DOcloud.
+  * `yourKey` is the API key (clientID) that you generate after registering for DOcplexcloud.
+  * `yourURL` is the base URL that you get after registering for DOcplexcloud.
 
    ```xml
   <profile>
@@ -61,7 +61,7 @@ settings file, where
   </profile>
 ```
 
-4. Download and install the IBM DOcloud API for Java client libraries.  
+4. Download and install the IBM DOcplexcloud API for Java client libraries.  
    You can download the library from the [developer center](https://developer.ibm.com/docloud/docs/java-client-api/java-client-library/).  
 Extract the jar file starting with `docloud_api_java_client` from the downloaded zip file (ignore the javadoc jar file).
 Then add this jar file to your local Maven repository like this:
@@ -98,7 +98,7 @@ mvn exec:java
 
 ## Optimization Problem
 
-This example illustrates how to use the DOcloud API to iteratively solve a multi-model, 
+This example illustrates how to use the DOcplexcloud API to iteratively solve a multi-model, 
 a series of linked optimization problems. The cutting stock problem is a classic example 
 of the column-generation algorithm for solving large, structured optimization models. 
 This example is adapted from the IBM CPLEX Optimization Studio sample library, 
@@ -165,10 +165,10 @@ business use, especially when the number of rolls used is very large. The Subpro
 on the other hand, is a discrete optimization problem in which the number of slices in 
 each pattern is held to be an integer.
 
-### How DOcloud Solves the Cutting Stock Problem
+### How DOcplexcloud Solves the Cutting Stock Problem
 
 The OPL models cited in the samples referenced above have been modified slightly in order 
-to conform with the DOcloud requirement that data exchange take place only through tuples 
+to conform with the DOcplexcloud requirement that data exchange take place only through tuples 
 and tuple sets in which the fields are primitive data types (strings, integers, floating 
 point numbers, etc.) In particular, a pattern is represented by a Pattern tuple that 
 provides an ID and a cost and by a set of Slice tuples, one for each item, that specifies 
@@ -210,13 +210,13 @@ overridden. Each DOM class also has a static inner class that represents the cor
 tuple set as a Java `List`.
 
 The DOM also includes collector classes that comprise the inputs and outputs of the master 
-problem and subproblem. These classes are used by the DOcloud API to serialize the input 
+problem and subproblem. These classes are used by the DOcplexcloud API to serialize the input 
 and deserialize the output as part of the solve job request.
 
 The structure of the code strongly mirrors the algorithm described above. In particular, 
 the algorithm appears in the `optimize` method of the `ColumnGeneration` class. This method 
 creates two instances of the `Optimizer` class, one for the Master problem and the other 
-for the Subproblem, which actually handle the DOcloud job requests. Note that the `Optimizer` 
+for the Subproblem, which actually handle the DOcplexcloud job requests. Note that the `Optimizer` 
 class takes a generic parameter representing the solution class of the optimization model; 
 thus the same code can be used for different optimization models. The solve method of the 
 `Optimizer` class creates and executes the job request and retrieves the output, handling 

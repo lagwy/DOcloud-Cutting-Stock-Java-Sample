@@ -1,6 +1,6 @@
 {
 	"provider": ["IBM"], 
-	"name":  "DOcloud Cutting Stock Java Sample" ,
+	"name":  "DOcplexcloud Cutting Stock Java Sample" ,
 	"model": [ "OPL-CPLEX" ],
 	"development": [ "Java" ],
 	"category": [ {"APPLICATION":["Desktop Application"]} ],
