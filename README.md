@@ -29,36 +29,40 @@ The sample consists of a Java project which contains:
 variable. If Maven cannot find the correct version, it will notify you with an error 
 message. The version of Java from your path can be checked using this command:
 
-   ```
+```
 java -version
 ```
 
 2. Install [Maven](https://Maven.apache.org/download.cgi).  
    Once installed, you can check that it is accessible using this command:
 
-   ```
+```
 mvn --version
 ```
 
 3. Once you have registered and logged in to DOcplexcloud, get the IBM DOcplexcloud 
-base URL and an API key, which are accessible on the 
-[Get API Key page](https://dropsolve-oaas.docloud.ibmcloud.com/dropsolve/api). 
+base URL and an API key, which are accessible on theÂ 
+[Get API KeyÂ page](https://dropsolve-oaas.docloud.ibmcloud.com/dropsolve/api). 
 Copy the base URL and the API key to the maven properties in your `~/.m2/settings.xml` 
 settings file, where
   * `yourKey` is the API key (clientID) that you generate after registering for DOcplexcloud.
   * `yourURL` is the base URL that you get after registering for DOcplexcloud.
 
-   ```xml
-  <profile>
-    <id>docloud</id>
-    <activation>
-      <activeByDefault>true</activeByDefault>
-    </activation>
-    <properties>
-      <docloud.baseurl>yourURL</docloud.baseurl>
-      <docloud.apikey.clientid>yourKey</docloud.apikey.clientid>
-    </properties>
-  </profile>
+```xml
+<settings>
+  <profiles>
+    <profile>
+      <id>docloud</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <docloud.baseurl>yourURL</docloud.baseurl>
+        <docloud.apikey.clientid>yourKey</docloud.apikey.clientid>
+      </properties>
+    </profile>
+  </profiles>
+</settings>  
 ```
 
 4. Download and install the IBM DOcplexcloud API for Java client libraries.  
@@ -66,7 +70,7 @@ settings file, where
 Extract the jar file starting with `docloud_api_java_client` from the downloaded zip file (ignore the javadoc jar file).
 Then add this jar file to your local Maven repository like this:
 
-   ```
+```
 mvn install:install-file -Dfile=<path-to-file> -DgroupId=com.ibm.optim.oaas  -DartifactId=api_java_client -Dversion=1.0-R1-SNAPSHOT -Dpackaging=jar
 ```
 
@@ -74,7 +78,7 @@ mvn install:install-file -Dfile=<path-to-file> -DgroupId=com.ibm.optim.oaas  -Da
 
 * From the sample directory, compile with Maven:
 
-   ```
+```
 mvn install
 ```
 
@@ -82,7 +86,7 @@ mvn install
 
 * From the sample directory, execute with Maven:
 
-   ```
+```
 mvn exec:java
 ```
 
@@ -114,7 +118,7 @@ The problem was originally formulated by Gilmore and Gomory in a pair of papers 
 There are numerous real-world examples of cutting stock problems. Here is one:
 
 A steel fabrication business needs to fill orders for rolls of sheet metal of different 
-widths (say 20", 25", 35",…) by slicing them from larger bulk rolls of a given width 
+widths (say 20", 25", 35",â€¦) by slicing them from larger bulk rolls of a given width 
 (say 110"). Similar situations occur in supplying paper, carpet, and many other materials. 
 The firm fabricates the material to fill the orders by setting up the cutter machine 
 in a pattern that comprises several widths of slices, as long as the total width of 
