@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ibm.optim.oaas.sample.cuttingStock.Server.SolutionHandler.Row;
+import com.ibm.optim.oaas.sample.cuttingStock.Server.Row;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -33,7 +33,7 @@ public class Server {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/test", new MyHandler());
-        server.createContext("/solution", new SolutionHandler());
+        server.createContext("/solution", new SolHandler());
         server.setExecutor(null); // creates a default executor
 
         System.out.println( "Server running on port " + port );
@@ -51,26 +51,8 @@ public class Server {
         }
     }
 
-    static class SolutionHandler implements HttpHandler {
+    static class SolHandler implements HttpHandler {
         
-        public Map<String, String> queryToMap(String query){
-            Map<String, String> result = new HashMap<String, String>();
-            for (String param : query.split("&")) {
-                String pair[] = param.split("=");
-                if (pair.length>1) {
-                    result.put(pair[0], pair[1]);
-                }else{
-                    result.put(pair[0], "");
-                }
-            }
-            return result;
-        }
-
-        static String convertStreamToString(java.io.InputStream is) {
-            java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-            return s.hasNext() ? s.next() : "";
-        }
-
         @Override
         public void handle(HttpExchange t) throws IOException {
             Map<String, String> params = queryToMap(t.getRequestURI().getQuery()); 
@@ -105,32 +87,52 @@ public class Server {
             os.close();
         }
 
-        public static class Requirement {
-            @JsonProperty("DesiredLengths")
-            public List<Row> desired;
 
-            @JsonProperty("PossibleLengths")
-            public List<Integer> possible;
-
+        public Map<String, String> queryToMap(String query){
+            Map<String, String> result = new HashMap<String, String>();
+            for (String param : query.split("&")) {
+                String pair[] = param.split("=");
+                if (pair.length>1) {
+                    result.put(pair[0], pair[1]);
+                }else{
+                    result.put(pair[0], "");
+                }
+            }
+            return result;
         }
 
-        public static class Row{
-            @JsonProperty("length")
-            public int length;
-
-            @JsonProperty("quantity")
-            public int quantity;
-
-            public Row(){
-                
-            }
-
-            public Row(int length, int quantity){
-                this.length = length;
-                this.quantity = quantity;
-            }
-
+        static String convertStreamToString(java.io.InputStream is) {
+            java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+            return s.hasNext() ? s.next() : "";
         }
+
+    }
+
+    public static class Requirement {
+        @JsonProperty("DesiredLengths")
+        public List<Row> desired;
+
+        @JsonProperty("PossibleLengths")
+        public List<Integer> possible;
+
+    }
+
+    public static class Row{
+        @JsonProperty("length")
+        public int length;
+
+        @JsonProperty("quantity")
+        public int quantity;
+
+        public Row(){
+            
+        }
+
+        public Row(int length, int quantity){
+            this.length = length;
+            this.quantity = quantity;
+        }
+
     }
 
 }
