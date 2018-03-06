@@ -146,21 +146,14 @@ public class Server {
             // ObjectMapper objectMapper = new ObjectMapper();
             try{
                 String arrayToJson = mapper.writeValueAsString( masterResult.getUse());
-                OutputStream os = new OutputStream(){
-                
-                    @Override
-                    public void write(int b) throws IOException {
-                        
-                    }
-                };
+                OutputStream os = t.getResponseBody();
                 System.out.println("1. Convert List of person objects to JSON :");
-                t.sendResponseHeaders(200, body.length());
+                t.sendResponseHeaders(200, arrayToJson.length());
                 t.getResponseHeaders().set("Content-Type", "application/json");
 
                 System.out.println( arrayToJson );
                 os.write( arrayToJson.getBytes() );
                 os.close();
-                System.out.println(arrayToJson);
             }catch(JsonProcessingException e){
                 System.out.println( "JsonProcessingException: " + e.getMessage() );
             }
