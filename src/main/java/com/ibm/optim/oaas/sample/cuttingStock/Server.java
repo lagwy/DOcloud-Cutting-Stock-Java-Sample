@@ -16,12 +16,19 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import com.ibm.optim.oaas.sample.cuttingStock.model.MasterData;
+import com.ibm.optim.oaas.sample.cuttingStock.model.SubproblemData;
+
 public class Server {
 
     // Mapper for Java --> JSON serialization
-	protected static ObjectMapper mapper = new ObjectMapper();
+    protected static ObjectMapper mapper = new ObjectMapper();
+    private static String baseURL = "";
+    private static String apiKeyClientId = "";
 
     public static void main(String[] args) throws Exception {
+        baseURL = args[0];
+		apiKeyClientId = args[1];
         int port = 8000;
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -76,9 +83,18 @@ public class Server {
 
             Requirement actualObj = mapper.readValue(body, Requirement.class);
 
-            System.out.println( actualObj.possible.toString() );
-            System.out.println( actualObj.desired.toString() );
+            // System.out.println( baseURL );
+            // System.out.println( apiKeyClientId );
 
+            // Create the controller
+            ColumnGeneration ctrl = new ColumnGeneration(baseURL,
+            apiKeyClientId,
+            "CuttingStock",
+            "opl/cuttingStock.mod",
+            "opl/cuttingStock-sub.mod");
+
+            // Optimize the model
+            ctrl.optimize(MasterData.default1(), SubproblemData.default1());
 
             t.sendResponseHeaders(200, body.length());
             t.getResponseHeaders().set("Content-Type", "application/json");

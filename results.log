@@ -1,30 +1,62 @@
-[2018-03-06T04:28:26Z, INFO] Initialization of items.
-[2018-03-06T04:28:26Z, INFO] Initialization of Item.
-[2018-03-06T04:28:26Z, INFO] Initialization of patterns.
-[2018-03-06T04:28:26Z, INFO] Initialization of Pattern.
-[2018-03-06T04:28:26Z, INFO] Initialization of slices.
-[2018-03-06T04:28:26Z, INFO] Initialization of Slice.
-[2018-03-06T04:28:26Z, INFO] Initialization of cost.
-[2018-03-06T04:28:26Z, INFO] Initialization of rolls.
-[2018-03-06T04:28:26Z, INFO] Initialization of ctOrder.
-[2018-03-06T04:28:26Z, WARN] Effective number of workers to be used for solve has been updated to: '10' (original value was: '0')
-[2018-03-06T04:28:26Z, INFO] CPXPARAM_Threads                                 10
-[2018-03-06T04:28:26Z, INFO] CPXPARAM_MIP_Strategy_CallbackReducedLP          0
-[2018-03-06T04:28:26Z, INFO] Tried aggregator 1 time.
-[2018-03-06T04:28:26Z, INFO] LP Presolve eliminated 5 rows and 5 columns.
-[2018-03-06T04:28:26Z, INFO] All rows and columns eliminated.
-[2018-03-06T04:28:26Z, INFO] Presolve time = 0.00 sec. (0.00 ticks)
-[2018-03-06T04:28:26Z, INFO] use =  [48 35 24 10 8]
-[2018-03-06T04:28:26Z, INFO] Use of pattern  <0 1> is : 48
-[2018-03-06T04:28:26Z, INFO] Use of pattern  <1 1> is : 35
-[2018-03-06T04:28:26Z, INFO] Use of pattern  <2 1> is : 24
-[2018-03-06T04:28:26Z, INFO] Use of pattern  <3 1> is : 10
-[2018-03-06T04:28:26Z, INFO] Use of pattern  <4 1> is : 8
-[2018-03-06T04:28:26Z, INFO] Initialization of duals.
-[2018-03-06T04:28:26Z, INFO] Initialization of Dual.
-[2018-03-06T04:28:26Z, INFO] Initialization of use.
-[2018-03-06T04:28:26Z, INFO] Initialization of Usage.
-[2018-03-06T04:28:26Z, INFO] Initialization of objective.
-[2018-03-06T04:28:26Z, INFO] Initialization of Objective.
-[2018-03-06T04:28:26Z, INFO] Total time spent in post processing: 5 msecs.
-[2018-03-06T04:28:26Z, INFO] Solve finished with status: OPTIMAL_SOLUTION.
+[2018-03-06T08:17:32Z, INFO] Initialization of parameter.
+[2018-03-06T08:17:32Z, INFO] Initialization of Parameters.
+[2018-03-06T08:17:32Z, INFO] Initialization of items.
+[2018-03-06T08:17:32Z, INFO] Initialization of Item.
+[2018-03-06T08:17:32Z, INFO] Initialization of duals.
+[2018-03-06T08:17:32Z, INFO] Initialization of Dual.
+[2018-03-06T08:17:32Z, INFO] Initialization of reducedCost.
+[2018-03-06T08:17:32Z, INFO] Initialization of slice.
+[2018-03-06T08:17:32Z, INFO] Initialization of ctFill.
+[2018-03-06T08:17:32Z, WARN] Effective number of workers to be used for solve has been updated to: '10' (original value was: '0')
+[2018-03-06T08:17:32Z, INFO] CPXPARAM_Threads                                 10
+[2018-03-06T08:17:32Z, INFO] CPXPARAM_MIP_Strategy_CallbackReducedLP          0
+[2018-03-06T08:17:32Z, INFO] Found incumbent of value 1.000000 after 0.00 sec. (0.00 ticks)
+[2018-03-06T08:17:32Z, INFO] Tried aggregator 1 time.
+[2018-03-06T08:17:32Z, INFO] MIP Presolve added 2 rows and 2 columns.
+[2018-03-06T08:17:32Z, INFO] MIP Presolve modified 2 coefficients.
+[2018-03-06T08:17:32Z, INFO] Reduced MIP has 3 rows, 7 columns, and 11 nonzeros.
+[2018-03-06T08:17:32Z, INFO] Reduced MIP has 1 binaries, 6 generals, 0 SOSs, and 0 indicators.
+[2018-03-06T08:17:32Z, INFO] Presolve time = 0.00 sec. (0.01 ticks)
+[2018-03-06T08:17:32Z, INFO] Probing fixed 0 vars, tightened 1 bounds.
+[2018-03-06T08:17:32Z, INFO] Probing time = 0.00 sec. (0.00 ticks)
+[2018-03-06T08:17:32Z, INFO] Tried aggregator 1 time.
+[2018-03-06T08:17:32Z, INFO] MIP Presolve eliminated 1 rows and 1 columns.
+[2018-03-06T08:17:32Z, INFO] MIP Presolve added 1 rows and 1 columns.
+[2018-03-06T08:17:32Z, INFO] Reduced MIP has 3 rows, 7 columns, and 11 nonzeros.
+[2018-03-06T08:17:32Z, INFO] Reduced MIP has 1 binaries, 6 generals, 0 SOSs, and 0 indicators.
+[2018-03-06T08:17:32Z, INFO] Presolve time = 0.00 sec. (0.01 ticks)
+[2018-03-06T08:17:32Z, INFO] Probing time = 0.00 sec. (0.00 ticks)
+[2018-03-06T08:17:32Z, INFO] MIP emphasis: balance optimality and feasibility.
+[2018-03-06T08:17:32Z, INFO] MIP search method: dynamic search.
+[2018-03-06T08:17:32Z, INFO] Parallel mode: deterministic, using up to 10 threads.
+[2018-03-06T08:17:32Z, INFO] Root relaxation solution time = 0.00 sec. (0.01 ticks)
+[2018-03-06T08:17:32Z, INFO]         Nodes                                         Cuts/
+[2018-03-06T08:17:32Z, INFO]    Node  Left     Objective  IInf  Best Integer    Best Bound    ItCnt     Gap
+[2018-03-06T08:17:32Z, INFO] *     0+    0                            1.0000       -3.5000           450.00%
+[2018-03-06T08:17:32Z, INFO] *     0+    0                            0.0000       -3.5000              --- 
+[2018-03-06T08:17:32Z, INFO]       0     0       -0.0926     2        0.0000       -0.0926        2     --- 
+[2018-03-06T08:17:32Z, INFO] Initialization of slices.
+[2018-03-06T08:17:32Z, INFO] Initialization of Slice.
+[2018-03-06T08:17:32Z, INFO] Initialization of Pattern.
+[2018-03-06T08:17:32Z, INFO] Initialization of newPattern.
+[2018-03-06T08:17:32Z, INFO] Initialization of objective.
+[2018-03-06T08:17:32Z, INFO] Initialization of Objective.
+[2018-03-06T08:17:32Z, INFO]       0     0        cutoff              0.0000                      5    0.00%
+[2018-03-06T08:17:32Z, INFO] Elapsed time = 0.06 sec. (0.06 ticks, tree = 0.01 MB, solutions = 2)
+[2018-03-06T08:17:32Z, INFO] Mixed integer rounding cuts applied:  1
+[2018-03-06T08:17:32Z, INFO] Root node processing (before b&c):
+[2018-03-06T08:17:32Z, INFO]   Real time             =    0.06 sec. (0.06 ticks)
+[2018-03-06T08:17:32Z, INFO] Parallel b&c, 10 threads:
+[2018-03-06T08:17:32Z, INFO]   Real time             =    0.00 sec. (0.00 ticks)
+[2018-03-06T08:17:32Z, INFO]   Sync time (average)   =    0.00 sec.
+[2018-03-06T08:17:32Z, INFO]   Wait time (average)   =    0.00 sec.
+[2018-03-06T08:17:32Z, INFO]                           ------------
+[2018-03-06T08:17:32Z, INFO] Total (root+branch&cut) =    0.06 sec. (0.06 ticks)
+[2018-03-06T08:17:32Z, INFO] Initialization of slices.
+[2018-03-06T08:17:32Z, INFO] Initialization of Slice.
+[2018-03-06T08:17:32Z, INFO] Initialization of Pattern.
+[2018-03-06T08:17:32Z, INFO] Initialization of newPattern.
+[2018-03-06T08:17:32Z, INFO] Initialization of objective.
+[2018-03-06T08:17:32Z, INFO] Initialization of Objective.
+[2018-03-06T08:17:32Z, INFO] Total time spent in post processing: 7 msecs.
+[2018-03-06T08:17:32Z, INFO] Solve finished with status: OPTIMAL_SOLUTION.
