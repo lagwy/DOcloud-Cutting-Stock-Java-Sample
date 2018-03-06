@@ -12,12 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ibm.optim.oaas.sample.cuttingStock.Server.Row;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import com.ibm.optim.oaas.sample.cuttingStock.model.MasterData;
+import com.ibm.optim.oaas.sample.cuttingStock.model.MasterResult;
 import com.ibm.optim.oaas.sample.cuttingStock.model.SubproblemData;
 import com.ibm.optim.oaas.sample.cuttingStock.model.Pattern;
 import com.ibm.optim.oaas.sample.cuttingStock.model.Item;
@@ -139,13 +141,33 @@ public class Server {
     
             ctrl.optimize( result , subproblemData );
 
-            t.sendResponseHeaders(200, body.length());
-            t.getResponseHeaders().set("Content-Type", "application/json");
+            MasterResult masterResult = ctrl.getMasterResult();
 
+            // ObjectMapper objectMapper = new ObjectMapper();
+            try{
+                String arrayToJson = mapper.writeValueAsString( masterResult.getUse());
+                OutputStream os = new OutputStream(){
+                
+                    @Override
+                    public void write(int b) throws IOException {
+                        
+                    }
+                };
+                System.out.println("1. Convert List of person objects to JSON :");
+                t.sendResponseHeaders(200, body.length());
+                t.getResponseHeaders().set("Content-Type", "application/json");
 
-            OutputStream os = t.getResponseBody();;
-            os.write( body.getBytes() );
-            os.close();
+                System.out.println( arrayToJson );
+                os.write( arrayToJson.getBytes() );
+                os.close();
+                System.out.println(arrayToJson);
+            }catch(JsonProcessingException e){
+                System.out.println( "JsonProcessingException: " + e.getMessage() );
+            }
+
+            // OutputStream os = t.getResponseBody();;
+            // os.write( body.getBytes() );
+            // os.close();
         }
 
     }
