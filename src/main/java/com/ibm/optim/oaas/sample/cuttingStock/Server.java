@@ -25,6 +25,8 @@ import com.ibm.optim.oaas.sample.cuttingStock.model.Pattern;
 import com.ibm.optim.oaas.sample.cuttingStock.model.Item;
 import com.ibm.optim.oaas.sample.cuttingStock.model.Slice;
 import com.ibm.optim.oaas.sample.cuttingStock.model.Parameters;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Output;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Usage;
 
 public class Server {
 
@@ -145,7 +147,17 @@ public class Server {
 
             // ObjectMapper objectMapper = new ObjectMapper();
             try{
-                String arrayToJson = mapper.writeValueAsString( masterResult.getUse());
+                ArrayList<Output> outputs = new ArrayList<>();
+                Map<Integer, String> patternSlices = result.getSlices().patternSlicesToStrings();
+
+                for(Usage u: masterResult.getUse()) {
+                    if(u.getNumber() > 0.0) {
+                        Output output = new Output(u.getPattern(),u.getNumber(),patternSlices.get(u.getPattern()));
+                        outputs.add(output);
+                    }
+                }
+
+                String arrayToJson = mapper.writeValueAsString( outputs) ;
                 OutputStream os = t.getResponseBody();
                 System.out.println("1. Convert List of person objects to JSON :");
                 t.sendResponseHeaders(200, arrayToJson.length());

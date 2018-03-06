@@ -1,6 +1,7 @@
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Parameters.java
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Pattern.java
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Dual.java
+/Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Output.java
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Objective.java
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/Slice.java
 /Users/lagwy/Documents/DriveOp/DOcloud-Cutting-Stock-Java-Sample/src/main/java/com/ibm/optim/oaas/sample/cuttingStock/model/MasterData.java
