@@ -18,13 +18,13 @@ public class MasterData {
 	private String problemId;
 
 	@JsonProperty("items")
-	private Item.List items = new Item.List();
+	public Item.List items = new Item.List();
 
 	@JsonProperty("patterns")
-	private Pattern.List patterns = new Pattern.List();
+	public Pattern.List patterns = new Pattern.List();
 
 	@JsonProperty("slices")
-	private Slice.List slices = new Slice.List();
+	public Slice.List slices = new Slice.List();
 
 	public MasterData() {
 		super();

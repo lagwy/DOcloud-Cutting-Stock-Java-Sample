@@ -17,13 +17,13 @@ public class SubproblemData {
 	private String problemId;
 
 	@JsonProperty("parameter")
-	private Parameters parameters = new Parameters(0, 0);
+	public Parameters parameters = new Parameters(0, 0);
 
 	@JsonProperty("items")
-	private Item.List items = new Item.List();
+	public Item.List items = new Item.List();
 
 	@JsonProperty("duals")
-	private Dual.List duals = new Dual.List();
+	public Dual.List duals = new Dual.List();
 
 	public SubproblemData() {
 		super();

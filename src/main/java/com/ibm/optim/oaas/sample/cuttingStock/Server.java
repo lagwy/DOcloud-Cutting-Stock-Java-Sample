@@ -10,6 +10,7 @@ import java.lang.Throwable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibm.optim.oaas.sample.cuttingStock.Server.Row;
 import com.sun.net.httpserver.HttpExchange;
@@ -18,6 +19,10 @@ import com.sun.net.httpserver.HttpServer;
 
 import com.ibm.optim.oaas.sample.cuttingStock.model.MasterData;
 import com.ibm.optim.oaas.sample.cuttingStock.model.SubproblemData;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Pattern;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Item;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Slice;
+import com.ibm.optim.oaas.sample.cuttingStock.model.Parameters;
 
 public class Server {
 
@@ -78,16 +83,51 @@ public class Server {
             while (is.read() != -1);
             is.close();
 
+            List<Integer> possibleCalculate = new ArrayList<Integer>();
+            List<Row> desiredCalculate = new ArrayList<Row>();
+
+            MasterData result = new MasterData("Cutting Stock Data Set from Endpoint");
+            SubproblemData subproblemData = new SubproblemData("Cutting Stock Data Set from Endpoint");
+
             try {
-                Requirement actualObj = mapper.readValue(body, Requirement.class);
+                JsonNode actualObj = mapper.readTree(body);
+
+                List<Integer> possible = new ArrayList<Integer>();
+                List<Row> desired = new ArrayList<Row>();
+
+
+                // Generate MasterData object
+                result.patterns = new Pattern.List();
+                result.items = new Item.List();
+                result.slices = new Slice.List();
+                subproblemData.parameters = new Parameters( actualObj.get("PossibleLengths").get(0).asInt() , actualObj.get("DesiredLengths").size() );
+                subproblemData.items = new Item.List();
+
+                for ( int i = 0; i < actualObj.get("PossibleLengths").size(); i++ ){
+                    possible.add( actualObj.get("PossibleLengths").get(i).asInt() );
+                }
+
+                Row row;
+                for ( int i = 0; i < actualObj.get("DesiredLengths").size(); i++ ){
+                    row = new Row( actualObj.get("DesiredLengths").get(i).get("Length").asInt(), actualObj.get("DesiredLengths").get(i).get("Quantity").asInt() );
+                    result.patterns.add( new Pattern( i, 1 ) );
+                    result.items.add( new Item( "" + row.length, row.length, row.quantity ) );
+                    result.slices.add( new Slice( "" + row.length, i, 1 ) );
+
+                    subproblemData.items.add(new Item("" + row.length, row.length, row.quantity));
+                    System.out.println( row.length );
+                    desired.add( row );
+                }
+
+                possibleCalculate = possible;
+                desiredCalculate = desired;
+
             } catch (Exception e){
-                System.out.println( "Could not map requirement from JSON." );
+                System.out.println( "Could not map requirement from JSON: " + e.getMessage() );
             }
-            
 
-            System.out.println( baseURL );
-            System.out.println( apiKeyClientId );
 
+            System.out.println( result.items.toString() );
             // Create the controller
             ColumnGeneration ctrl = new ColumnGeneration(baseURL,
             apiKeyClientId,
@@ -95,8 +135,9 @@ public class Server {
             "opl/cuttingStock.mod",
             "opl/cuttingStock-sub.mod");
 
-            // Optimize the model
-            // ctrl.optimize(MasterData.default1(), SubproblemData.default1());
+            System.out.println( "Found " + desiredCalculate.size() + " desired lengths in the request." );
+    
+            ctrl.optimize( result , subproblemData );
 
             t.sendResponseHeaders(200, body.length());
             t.getResponseHeaders().set("Content-Type", "application/json");
@@ -111,19 +152,44 @@ public class Server {
 
     public static class Requirement {
         @JsonProperty("DesiredLengths")
-        public List<Row> desired;
+        public static List<Row> desired;
 
         @JsonProperty("PossibleLengths")
-        public List<Integer> possible;
+        public static List<Integer> possible;
+
+        public Requirement(){
+
+        }
+
+        public Requirement(List<Row> rows, List<Integer> possible){
+            this.desired = rows;
+            this.possible = possible;
+        }
+
+        public static List<Row> getDesired(){
+            return desired;
+        }
+
+        public static void setDesired(List<Row> rows){
+            desired = rows;
+        }
+
+        public static List<Integer> getPossible(){
+            return possible;
+        }
+
+        public static void setPossible(List<Integer> rows){
+            possible = rows;
+        }
 
     }
 
     public static class Row{
         @JsonProperty("Length")
-        public int length;
+        public static int length;
 
         @JsonProperty("Quantity")
-        public int quantity;
+        public static int quantity;
 
         public Row(){
             
