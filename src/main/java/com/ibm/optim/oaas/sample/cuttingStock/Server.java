@@ -29,7 +29,7 @@ public class Server {
     public static void main(String[] args) throws Exception {
         baseURL = args[0];
 		apiKeyClientId = args[1];
-        int port = 80;
+        int port = 8001;
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/test", new MyHandler());
@@ -40,14 +40,31 @@ public class Server {
         server.start();
     }
 
+    public static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = "Test response";
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
+            InputStream is = t.getRequestBody();
+            String body = convertStreamToString(is);
+
+            while (is.read() != -1);
+            is.close();
+
+            System.out.println( baseURL );
+            System.out.println( apiKeyClientId );
+
+            t.sendResponseHeaders(200, body.length());
+            t.getResponseHeaders().set("Content-Type", "application/json");
+
+
+            OutputStream os = t.getResponseBody();;
+            os.write( body.getBytes() );
             os.close();
+
         }
     }
 
@@ -55,18 +72,21 @@ public class Server {
         
         @Override
         public void handle(HttpExchange t) throws IOException {
-            Map<String, String> params = queryToMap(t.getRequestURI().getQuery()); 
-
             InputStream is = t.getRequestBody();
             String body = convertStreamToString(is);
 
             while (is.read() != -1);
             is.close();
 
-            Requirement actualObj = mapper.readValue(body, Requirement.class);
+            try {
+                Requirement actualObj = mapper.readValue(body, Requirement.class);
+            } catch (Exception e){
+                System.out.println( "Could not map requirement from JSON." );
+            }
+            
 
-            // System.out.println( baseURL );
-            // System.out.println( apiKeyClientId );
+            System.out.println( baseURL );
+            System.out.println( apiKeyClientId );
 
             // Create the controller
             ColumnGeneration ctrl = new ColumnGeneration(baseURL,
@@ -76,7 +96,7 @@ public class Server {
             "opl/cuttingStock-sub.mod");
 
             // Optimize the model
-            ctrl.optimize(MasterData.default1(), SubproblemData.default1());
+            // ctrl.optimize(MasterData.default1(), SubproblemData.default1());
 
             t.sendResponseHeaders(200, body.length());
             t.getResponseHeaders().set("Content-Type", "application/json");
@@ -85,25 +105,6 @@ public class Server {
             OutputStream os = t.getResponseBody();;
             os.write( body.getBytes() );
             os.close();
-        }
-
-
-        public Map<String, String> queryToMap(String query){
-            Map<String, String> result = new HashMap<String, String>();
-            for (String param : query.split("&")) {
-                String pair[] = param.split("=");
-                if (pair.length>1) {
-                    result.put(pair[0], pair[1]);
-                }else{
-                    result.put(pair[0], "");
-                }
-            }
-            return result;
-        }
-
-        static String convertStreamToString(java.io.InputStream is) {
-            java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-            return s.hasNext() ? s.next() : "";
         }
 
     }
@@ -118,10 +119,10 @@ public class Server {
     }
 
     public static class Row{
-        @JsonProperty("length")
+        @JsonProperty("Length")
         public int length;
 
-        @JsonProperty("quantity")
+        @JsonProperty("Quantity")
         public int quantity;
 
         public Row(){
