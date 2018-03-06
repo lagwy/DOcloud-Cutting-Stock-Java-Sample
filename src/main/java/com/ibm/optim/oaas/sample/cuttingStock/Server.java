@@ -29,7 +29,7 @@ public class Server {
     public static void main(String[] args) throws Exception {
         baseURL = args[0];
 		apiKeyClientId = args[1];
-        int port = 8001;
+        int port = 80;
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/test", new MyHandler());
