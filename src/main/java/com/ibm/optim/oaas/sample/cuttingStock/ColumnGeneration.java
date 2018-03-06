@@ -136,7 +136,7 @@ public class ColumnGeneration {
 
 		int iterations = 0;
 
-		while(iterations < 10 && reducedCost <- epsilon) {
+		while(iterations < 40 && reducedCost <- epsilon) {
 
 			// Set up and solve Master Problem
 			if(iterations > 0) {
