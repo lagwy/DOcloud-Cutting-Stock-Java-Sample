@@ -78,7 +78,7 @@
 				 <version>1.3</version>
 		     <configuration>
            <killAfter>-1</killAfter>
-		       <mainClass>com.ibm.optim.oaas.sample.cuttingStock.ColumnGeneration</mainClass>
+		       <mainClass>com.ibm.optim.oaas.sample.cuttingStock.Server</mainClass>
 		       <arguments>  
         	   <argument>${docloud.baseurl}</argument>  
          	   <argument>${docloud.apikey.clientid}</argument>  

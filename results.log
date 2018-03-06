@@ -1,0 +1,30 @@
+[2018-03-06T04:28:26Z, INFO] Initialization of items.
+[2018-03-06T04:28:26Z, INFO] Initialization of Item.
+[2018-03-06T04:28:26Z, INFO] Initialization of patterns.
+[2018-03-06T04:28:26Z, INFO] Initialization of Pattern.
+[2018-03-06T04:28:26Z, INFO] Initialization of slices.
+[2018-03-06T04:28:26Z, INFO] Initialization of Slice.
+[2018-03-06T04:28:26Z, INFO] Initialization of cost.
+[2018-03-06T04:28:26Z, INFO] Initialization of rolls.
+[2018-03-06T04:28:26Z, INFO] Initialization of ctOrder.
+[2018-03-06T04:28:26Z, WARN] Effective number of workers to be used for solve has been updated to: '10' (original value was: '0')
+[2018-03-06T04:28:26Z, INFO] CPXPARAM_Threads                                 10
+[2018-03-06T04:28:26Z, INFO] CPXPARAM_MIP_Strategy_CallbackReducedLP          0
+[2018-03-06T04:28:26Z, INFO] Tried aggregator 1 time.
+[2018-03-06T04:28:26Z, INFO] LP Presolve eliminated 5 rows and 5 columns.
+[2018-03-06T04:28:26Z, INFO] All rows and columns eliminated.
+[2018-03-06T04:28:26Z, INFO] Presolve time = 0.00 sec. (0.00 ticks)
+[2018-03-06T04:28:26Z, INFO] use =  [48 35 24 10 8]
+[2018-03-06T04:28:26Z, INFO] Use of pattern  <0 1> is : 48
+[2018-03-06T04:28:26Z, INFO] Use of pattern  <1 1> is : 35
+[2018-03-06T04:28:26Z, INFO] Use of pattern  <2 1> is : 24
+[2018-03-06T04:28:26Z, INFO] Use of pattern  <3 1> is : 10
+[2018-03-06T04:28:26Z, INFO] Use of pattern  <4 1> is : 8
+[2018-03-06T04:28:26Z, INFO] Initialization of duals.
+[2018-03-06T04:28:26Z, INFO] Initialization of Dual.
+[2018-03-06T04:28:26Z, INFO] Initialization of use.
+[2018-03-06T04:28:26Z, INFO] Initialization of Usage.
+[2018-03-06T04:28:26Z, INFO] Initialization of objective.
+[2018-03-06T04:28:26Z, INFO] Initialization of Objective.
+[2018-03-06T04:28:26Z, INFO] Total time spent in post processing: 5 msecs.
+[2018-03-06T04:28:26Z, INFO] Solve finished with status: OPTIMAL_SOLUTION.
